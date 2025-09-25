@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BaseButton from '@/template/BaseButton.vue'
+import OfferingsTableExample from '@/template/OfferingsTableExample.vue'
 import ViewHead from '@/template/ViewHead.vue'
 import { IconPlus } from '@tabler/icons-vue'
 </script>
@@ -11,6 +12,8 @@ import { IconPlus } from '@tabler/icons-vue'
         Create new offering
       </BaseButton>
     </ViewHead>
+
+    <OfferingsTableExample />
   </div>
 </template>
 <style scoped></style>
