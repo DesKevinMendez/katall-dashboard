@@ -29,11 +29,13 @@
       </div>
 
       <!-- Menu Items -->
-      <template v-for="item in userDropdownItems" :key="item.to">
+      <template v-for="item in userDropdownItems" :key="item.to || item.label">
         <!-- Divider before item -->
         <div v-if="item.divider" class="border-t border-gray-700 my-1"></div>
 
+        <!-- Regular navigation items -->
         <router-link
+          v-if="item.to"
           :to="item.to"
           class="flex items-center space-x-3 px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
           @click="closeDropdown"
@@ -41,6 +43,16 @@
           <component :is="item.icon" class="w-5 h-5" />
           <span>{{ item.label }}</span>
         </router-link>
+
+        <!-- Action items (like logout) -->
+        <button
+          v-else
+          class="flex items-center space-x-3 px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors w-full text-left"
+          @click="handleItemClick(item)"
+        >
+          <component :is="item.icon" class="w-5 h-5" />
+          <span>{{ item.label }}</span>
+        </button>
       </template>
     </div>
   </div>
@@ -71,7 +83,6 @@ const userDropdownItems: DropdownItem[] = [
     icon: IconSettings,
   },
   {
-    to: '/logout',
     label: 'Logout',
     icon: IconLogout,
     divider: true,
@@ -86,6 +97,13 @@ function toggleDropdown() {
 
 function closeDropdown() {
   isOpen.value = false
+}
+
+function handleItemClick(item: DropdownItem) {
+  if (item.label === 'Logout') {
+    console.log('logout')
+  }
+  closeDropdown()
 }
 
 function closeDropdownOnClickOutside(event: Event) {

@@ -12,6 +12,34 @@ const router = createRouter({
           path: '',
           component: () => import('@/modules/Home/views/HomeView.vue'),
         },
+        {
+          path: 'offerings',
+          component: () => import('@/modules/Offerings/views/OfferingsView.vue'),
+        },
+        {
+          path: 'investors',
+          component: () => import('@/modules/Investors/views/InvestorsView.vue'),
+        },
+        {
+          path: 'transactions',
+          component: () => import('@/modules/Transactions/views/TransactionsView.vue'),
+        },
+        {
+          path: 'documents',
+          component: () => import('@/modules/Documents/views/DocumentsView.vue'),
+        },
+        {
+          path: 'analytics',
+          component: () => import('@/modules/Analytics/views/AnalyticsView.vue'),
+        },
+        {
+          path: 'settings',
+          component: () => import('@/modules/Settings/views/SettingsView.vue'),
+        },
+        {
+          path: 'profile',
+          component: () => import('@/modules/Profile/views/ProfileView.vue'),
+        },
       ],
     },
   ],
