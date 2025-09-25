@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ViewHead from '@/template/ViewHead.vue'
+</script>
 <template>
   <div>
-    <h1 class="text-white">Home</h1>
+    <ViewHead title="Home" subtitle="Welcome to your dashboard overview" />
   </div>
 </template>
 <style scoped></style>

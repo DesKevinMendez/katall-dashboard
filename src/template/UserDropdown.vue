@@ -61,7 +61,13 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { IconChevronDown, IconUser, IconSettings, IconLogout } from '@tabler/icons-vue'
-import { type DropdownItem } from './BaseDropdown.vue'
+
+interface UserDropdownItem {
+  to?: string
+  label: string
+  icon: object
+  divider?: boolean
+}
 
 interface Props {
   name: string
@@ -71,7 +77,7 @@ interface Props {
 
 defineProps<Props>()
 
-const userDropdownItems: DropdownItem[] = [
+const userDropdownItems: UserDropdownItem[] = [
   {
     to: '/profile',
     label: 'Profile',
@@ -99,7 +105,7 @@ function closeDropdown() {
   isOpen.value = false
 }
 
-function handleItemClick(item: DropdownItem) {
+function handleItemClick(item: UserDropdownItem) {
   if (item.label === 'Logout') {
     console.log('logout')
   }

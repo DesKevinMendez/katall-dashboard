@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ViewHead from '@/template/ViewHead.vue'
+</script>
 <template>
   <div>
-    <h1 class="text-white">Transactions</h1>
+    <ViewHead title="Transactions" subtitle="View all token transactions for your startup" />
   </div>
 </template>
 <style scoped></style>

@@ -1,7 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ViewHead from '@/template/ViewHead.vue'
+</script>
 <template>
   <div>
-    <h1 class="text-white">Documents</h1>
+    <ViewHead
+      title="Documents"
+      subtitle="Complete your startup information and upload required documents"
+    />
   </div>
 </template>
 <style scoped></style>

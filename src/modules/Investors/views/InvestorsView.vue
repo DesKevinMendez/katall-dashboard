@@ -1,7 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ViewHead from '@/template/ViewHead.vue'
+</script>
 <template>
   <div>
-    <h1 class="text-white">Investors</h1>
+    <ViewHead
+      title="Investors"
+      subtitle="View and manage investors who own tokens in your startup"
+    />
   </div>
 </template>
 <style scoped></style>
