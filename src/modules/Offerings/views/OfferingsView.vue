@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import BaseButton from '@/template/BaseButton.vue'
 import ViewHead from '@/template/ViewHead.vue'
+import { IconPlus } from '@tabler/icons-vue'
 </script>
 <template>
   <div>
     <ViewHead title="Offerings" subtitle="Manage your equity offerings and track their performance">
-      <BaseButton class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg">
+      <BaseButton>
+        <IconPlus class="w-4 h-4 mr-2" />
         Create new offering
       </BaseButton>
     </ViewHead>

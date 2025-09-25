@@ -6,7 +6,7 @@
       @click="toggleDropdown"
     >
       <!-- Avatar -->
-      <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
+      <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
         <span class="text-sm font-semibold text-white">{{ initials }}</span>
       </div>
       <!-- User Name -->
