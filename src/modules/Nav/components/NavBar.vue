@@ -14,10 +14,11 @@
 
           <!-- Navigation Links -->
           <div class="hidden md:flex items-center space-x-1">
-            <!-- Dashboard (Active) -->
+            <!-- Dashboard -->
             <router-link
               to="/"
-              class="flex items-center space-x-2 px-3 py-2 rounded-md bg-gray-800 text-white"
+              class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+              exact-active-class="bg-gray-800 text-white"
             >
               <IconHome class="w-5 h-5" />
               <span>Dashboard</span>
@@ -27,6 +28,7 @@
             <router-link
               to="/offerings"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+              exact-active-class="bg-gray-800 text-white"
             >
               <IconPackage class="w-5 h-5" />
               <span>Offerings</span>
@@ -36,6 +38,7 @@
             <router-link
               to="/investors"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+              exact-active-class="bg-gray-800 text-white"
             >
               <IconUsers class="w-5 h-5" />
               <span>Investors</span>
@@ -45,6 +48,7 @@
             <router-link
               to="/transactions"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+              exact-active-class="bg-gray-800 text-white"
             >
               <IconReceipt class="w-5 h-5" />
               <span>Transactions</span>
@@ -54,6 +58,7 @@
             <router-link
               to="/documents"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+              exact-active-class="bg-gray-800 text-white"
             >
               <IconFileText class="w-5 h-5" />
               <span>Documents</span>
@@ -93,35 +98,40 @@
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800 rounded-lg mt-2">
           <router-link
             to="/"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-white bg-gray-700"
+            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+            exact-active-class="text-white bg-gray-700"
           >
             <IconHome class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
           <router-link
             to="/offerings"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700"
+            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+            exact-active-class="text-white bg-gray-700"
           >
             <IconPackage class="w-5 h-5" />
             <span>Offerings</span>
           </router-link>
           <router-link
             to="/investors"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700"
+            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+            exact-active-class="text-white bg-gray-700"
           >
             <IconUsers class="w-5 h-5" />
             <span>Investors</span>
           </router-link>
           <router-link
             to="/transactions"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700"
+            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+            exact-active-class="text-white bg-gray-700"
           >
             <IconReceipt class="w-5 h-5" />
             <span>Transactions</span>
           </router-link>
           <router-link
             to="/documents"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700"
+            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+            exact-active-class="text-white bg-gray-700"
           >
             <IconFileText class="w-5 h-5" />
             <span>Documents</span>
