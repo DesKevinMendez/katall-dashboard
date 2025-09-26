@@ -17,6 +17,10 @@ const router = createRouter({
           component: () => import('@/modules/Offerings/views/OfferingsView.vue'),
         },
         {
+          path: 'offerings/:id',
+          component: () => import('@/modules/Offerings/views/OfferingsProfileView.vue'),
+        },
+        {
           path: 'investors',
           component: () => import('@/modules/Investors/views/InvestorsView.vue'),
         },

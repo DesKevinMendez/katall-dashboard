@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import BaseTable from '@/template/BaseTable.vue'
 import BaseBadge from '@/template/BaseBadge.vue'
 import ProgressBar from '@/template/ProgressBar.vue'
@@ -231,6 +232,7 @@ const originalOfferings: Offering[] = [
 ]
 
 const offerings = ref<Offering[]>([...originalOfferings])
+const router = useRouter()
 
 // Pagination state
 const currentPage = ref(1)
@@ -282,6 +284,13 @@ function handleSort(column: string, direction: 'asc' | 'desc') {
 
 function handleAction(action: string, row: Record<string, unknown>) {
   const offering = row as unknown as Offering
+
+  if (action === 'view') {
+    // Use the offering name as ID for navigation (you can change this to use a different field)
+    const offeringId = offering.name.toLowerCase().replace(/\s+/g, '-')
+    router.push(`/offerings/${offeringId}`)
+  }
+
   console.log(`Action: ${action}`, offering)
 }
 
