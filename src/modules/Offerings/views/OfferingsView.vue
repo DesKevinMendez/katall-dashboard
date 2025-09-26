@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseButton from '@/template/BaseButton.vue'
-import OfferingsTableExample from '@/template/OfferingsTableExample.vue'
+import OfferingsTable from '@/modules/Offerings/components/OfferingTable.vue'
 import ViewHead from '@/template/ViewHead.vue'
 import { IconPlus } from '@tabler/icons-vue'
 </script>
@@ -13,7 +13,7 @@ import { IconPlus } from '@tabler/icons-vue'
       </BaseButton>
     </ViewHead>
 
-    <OfferingsTableExample />
+    <OfferingsTable />
   </div>
 </template>
 <style scoped></style>

@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import BaseTable from '@/template/BaseTable.vue'
 import BaseBadge from '@/template/BaseBadge.vue'
+import ProgressBar from '@/template/ProgressBar.vue'
 import { IconEye } from '@tabler/icons-vue'
 
 interface Offering extends Record<string, unknown> {
@@ -296,9 +297,9 @@ function getStatusVariant(
   return statusMap[status.toLowerCase()] || 'default'
 }
 
-function formatProgress(current: number, total: number): number {
-  if (total === 0) return 0
-  return Math.round((current / total) * 100)
+function calculateProgressPercentage(raised: number, target: number): number {
+  if (target === 0) return 0
+  return Math.round((raised / target) * 100)
 }
 
 function handlePageChange(page: number) {
@@ -332,19 +333,16 @@ function handleItemsPerPageChange(newItemsPerPage: number) {
     <template #cell-raised="{ row }">
       <div class="flex flex-col">
         <div class="text-sm text-white">
-          ${{ (row.raised as number)?.toLocaleString() }} / ${{
-            (row.target as number)?.toLocaleString()
+          ${{ ((row.raised as number) || 0).toLocaleString() }} / ${{
+            ((row.target as number) || 1).toLocaleString()
           }}
         </div>
         <div class="mt-1">
-          <div class="w-full bg-gray-700 rounded-full h-2">
-            <div
-              class="bg-blue-600 h-2 rounded-full transition-all duration-300"
-              :style="{
-                width: `${formatProgress((row.raised as number) || 0, (row.target as number) || 1)}%`,
-              }"
-            ></div>
-          </div>
+          <ProgressBar
+            :percentage="
+              calculateProgressPercentage((row.raised as number) || 0, (row.target as number) || 1)
+            "
+          />
         </div>
       </div>
     </template>
