@@ -1,10 +1,18 @@
 <script setup lang="ts">
 interface Props {
-  variant?: 'active' | 'closed' | 'review' | 'validated' | 'default'
+  variant?:
+    | 'active'
+    | 'closed'
+    | 'review'
+    | 'validated'
+    | 'verified'
+    | 'pending'
+    | 'rejected'
+    | 'default'
   size?: 'sm' | 'md' | 'lg'
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   variant: 'default',
   size: 'md',
 })
@@ -15,6 +23,9 @@ function getVariantClasses(variant: string): string {
     closed: 'bg-gray-100 text-gray-800',
     review: 'bg-yellow-100 text-yellow-800',
     validated: 'bg-blue-100 text-blue-800',
+    verified: 'bg-green-100 text-green-800',
+    pending: 'bg-yellow-100 text-yellow-800',
+    rejected: 'bg-red-100 text-red-800',
     default: 'bg-gray-100 text-gray-800',
   }
   return variants[variant] || variants.default
