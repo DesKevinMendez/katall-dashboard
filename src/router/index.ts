@@ -25,6 +25,10 @@ const router = createRouter({
           component: () => import('@/modules/Investors/views/InvestorsView.vue'),
         },
         {
+          path: 'investors/:id',
+          component: () => import('@/modules/Investors/views/InvestorProfileView.vue'),
+        },
+        {
           path: 'transactions',
           component: () => import('@/modules/Transactions/views/TransactionsView.vue'),
         },
