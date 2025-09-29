@@ -152,9 +152,8 @@ function initializeZoom() {
         background: 'rgba(0, 0, 0, 0.8)',
         margin: 24,
         scrollOffset: 0,
-        container: null,
-        template: null,
-        zIndex: 999,
+        container: undefined,
+        template: undefined,
       })
     }
   })
