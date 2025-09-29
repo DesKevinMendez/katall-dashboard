@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
+import type { AllowAny } from '@/types'
 
 interface Props {
-  onSubmit?: (values: Record<string, any>) => void
+  onSubmit?: (values: Record<string, AllowAny>) => void
 }
 
 const props = defineProps<Props>()

@@ -3,8 +3,9 @@ import BaseCard from '@/template/BaseCard.vue'
 import BaseInput from '@/template/BaseInput.vue'
 import BaseButton from '@/template/BaseButton.vue'
 import BaseForm from '@/template/BaseForm.vue'
+import type { AllowAny } from '@/types'
 
-function handleSubmit(values: Record<string, any>) {
+function handleSubmit(values: Record<string, AllowAny>) {
   console.log('Form submitted:', values)
 }
 </script>

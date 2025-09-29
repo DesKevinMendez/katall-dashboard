@@ -2,6 +2,7 @@
 import { ref, onMounted, nextTick } from 'vue'
 import { IconUpload } from '@tabler/icons-vue'
 import mediumZoom from 'medium-zoom'
+import type { AllowAny } from '@/types'
 
 interface Props {
   title: string
@@ -17,7 +18,7 @@ const fileInput = ref<HTMLInputElement>()
 const isDragOver = ref(false)
 const selectedFiles = ref<File[]>([])
 const imagePreviews = ref<Record<string, string>>({})
-let zoomInstance: any = null
+let zoomInstance: AllowAny = null
 
 const modelValue = defineModel<File[]>()
 
