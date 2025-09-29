@@ -171,33 +171,6 @@ const pagination = computed(() => ({
   itemsPerPage: itemsPerPage.value,
 }))
 
-function handleSort(column: string, direction: 'asc' | 'desc') {
-  console.log(`Sorting by ${column} in ${direction} order`)
-
-  investors.value = [...originalInvestors].sort((a, b) => {
-    let aValue: string | number | Date = a[column as keyof Investor] as string | number
-    let bValue: string | number | Date = b[column as keyof Investor] as string | number
-
-    // Handle date sorting for 'purchaseDate' column
-    if (column === 'purchaseDate') {
-      aValue = new Date(aValue as string)
-      bValue = new Date(bValue as string)
-    }
-
-    // Handle string comparison
-    if (typeof aValue === 'string' && typeof bValue === 'string') {
-      aValue = aValue.toLowerCase()
-      bValue = bValue.toLowerCase()
-    }
-
-    if (direction === 'asc') {
-      return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
-    } else {
-      return aValue > bValue ? -1 : aValue < bValue ? 1 : 0
-    }
-  })
-}
-
 function handleAction(action: string, row: Record<string, unknown>) {
   const investor = row as unknown as Investor
 
@@ -238,7 +211,6 @@ function handleItemsPerPageChange(newItemsPerPage: number) {
     :columns="columns"
     :data="paginatedInvestors"
     :pagination="pagination"
-    @sort="handleSort"
     @action="handleAction"
     @page-change="handlePageChange"
     @items-per-page-change="handleItemsPerPageChange"

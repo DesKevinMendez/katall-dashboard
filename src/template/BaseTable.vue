@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { TransitionGroup } from 'vue'
 import BasePagination from './BasePagination.vue'
@@ -27,13 +27,12 @@ interface Props {
 }
 
 interface Emits {
-  (e: 'sort', column: string, direction: 'asc' | 'desc'): void
   (e: 'action', action: string, row: Record<string, unknown>): void
   (e: 'page-change', page: number): void
   (e: 'items-per-page-change', itemsPerPage: number): void
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   loading: false,
   showItemsPerPage: true,
 })
@@ -43,6 +42,38 @@ const emit = defineEmits<Emits>()
 const sortColumn = ref<string | null>(null)
 const sortDirection = ref<'asc' | 'desc'>('asc')
 
+const sortedData = computed(() => {
+  if (!sortColumn.value) return props.data
+
+  return [...props.data].sort((a, b) => {
+    let aValue: string | number | Date = a[sortColumn.value!] as string | number
+    let bValue: string | number | Date = b[sortColumn.value!] as string | number
+
+    // Handle date sorting for common date columns
+    if (
+      sortColumn.value === 'dateTime' ||
+      sortColumn.value === 'purchaseDate' ||
+      sortColumn.value === 'createdAt' ||
+      sortColumn.value === 'created'
+    ) {
+      aValue = new Date(aValue as string)
+      bValue = new Date(bValue as string)
+    }
+
+    // Handle string comparison
+    if (typeof aValue === 'string' && typeof bValue === 'string') {
+      aValue = aValue.toLowerCase()
+      bValue = bValue.toLowerCase()
+    }
+
+    if (sortDirection.value === 'asc') {
+      return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
+    } else {
+      return aValue > bValue ? -1 : aValue < bValue ? 1 : 0
+    }
+  })
+})
+
 function handleSort(column: string) {
   if (sortColumn.value === column) {
     sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
@@ -50,7 +81,6 @@ function handleSort(column: string) {
     sortColumn.value = column
     sortDirection.value = 'asc'
   }
-  emit('sort', column, sortDirection.value)
 }
 
 function handlePageChange(page: number) {
@@ -161,7 +191,7 @@ function handleItemsPerPageChange(itemsPerPage: number) {
             v-else
             name="fade"
             tag="tr"
-            v-for="(row, index) in data"
+            v-for="(row, index) in sortedData"
             :key="`${row.name || index}-${index}`"
             class="hover:bg-gray-750 transition-colors"
           >

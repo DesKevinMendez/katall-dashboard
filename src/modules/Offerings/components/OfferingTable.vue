@@ -255,33 +255,6 @@ const pagination = computed(() => ({
   itemsPerPage: itemsPerPage.value,
 }))
 
-function handleSort(column: string, direction: 'asc' | 'desc') {
-  console.log(`Sorting by ${column} in ${direction} order`)
-
-  offerings.value = [...originalOfferings].sort((a, b) => {
-    let aValue: string | number | Date = a[column as keyof Offering] as string | number
-    let bValue: string | number | Date = b[column as keyof Offering] as string | number
-
-    // Handle date sorting for 'created' column
-    if (column === 'created') {
-      aValue = new Date(aValue as string)
-      bValue = new Date(bValue as string)
-    }
-
-    // Handle string comparison
-    if (typeof aValue === 'string' && typeof bValue === 'string') {
-      aValue = aValue.toLowerCase()
-      bValue = bValue.toLowerCase()
-    }
-
-    if (direction === 'asc') {
-      return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
-    } else {
-      return aValue > bValue ? -1 : aValue < bValue ? 1 : 0
-    }
-  })
-}
-
 function handleAction(action: string, row: Record<string, unknown>) {
   const offering = row as unknown as Offering
 
@@ -328,7 +301,6 @@ function handleItemsPerPageChange(newItemsPerPage: number) {
     :pagination="pagination"
     title="All Offerings"
     subtitle="Manage and track all your equity offerings"
-    @sort="handleSort"
     @action="handleAction"
     @page-change="handlePageChange"
     @items-per-page-change="handleItemsPerPageChange"
