@@ -5,6 +5,8 @@ import ViewHead from '@/template/ViewHead.vue'
 import BaseButton from '@/template/BaseButton.vue'
 import BaseTab from '@/template/BaseTab.vue'
 import InvestorProfileCard from '../components/InvestorProfileCard.vue'
+import DocumentsSection from '../components/DocumentsSection.vue'
+import InvestmentsSection from '../components/InvestmentsSection.vue'
 import { IconArrowLeft } from '@tabler/icons-vue'
 
 const router = useRouter()
@@ -50,11 +52,11 @@ function goBackToInvestors() {
           <BaseTab v-model="activeTab" :tabs="tabs">
             <template #default="{ activeTab }">
               <div v-if="activeTab === 'documents'">
-                <p class="text-white">Documents content for {{ investor.fullName }}</p>
+                <DocumentsSection />
               </div>
 
               <div v-else-if="activeTab === 'investments'">
-                <p class="text-white">Investments content for {{ investor.fullName }}</p>
+                <InvestmentsSection />
               </div>
             </template>
           </BaseTab>

@@ -102,14 +102,6 @@ function burnTokens() {
   console.log('Burn tokens')
 }
 
-function viewInvestorProfile(investorName: string) {
-  console.log('View investor profile:', investorName)
-}
-
-function viewAllInvestors() {
-  console.log('View all investors')
-}
-
 function viewAllTransactions() {
   console.log('View all transactions')
 }
@@ -141,8 +133,6 @@ function viewAllTransactions() {
             <InvestorTabContent
               :investors="investorsData"
               :total-investors="overviewData.totalInvestors"
-              @view-investor-profile="viewInvestorProfile"
-              @view-all-investors="viewAllInvestors"
             />
           </div>
 

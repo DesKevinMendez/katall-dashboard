@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import BaseButton from '@/template/BaseButton.vue'
 import { IconUsers } from '@tabler/icons-vue'
 
@@ -15,17 +16,16 @@ interface Props {
 
 defineProps<Props>()
 
-const emit = defineEmits<{
-  viewInvestorProfile: [investorName: string]
-  viewAllInvestors: []
-}>()
+const router = useRouter()
 
 function handleViewProfile(investorName: string) {
-  emit('viewInvestorProfile', investorName)
+  // Convert investor name to URL-friendly format
+  const investorId = investorName.toLowerCase().replace(/\s+/g, '-')
+  router.push(`/investors/${investorId}`)
 }
 
 function handleViewAll() {
-  emit('viewAllInvestors')
+  router.push('/investors')
 }
 </script>
 
