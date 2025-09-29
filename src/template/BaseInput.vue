@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { Field } from 'vee-validate'
 
-interface Props {
+const {
+  label,
+  name,
+  type = 'text',
+  placeholder = '',
+  description = '',
+  hint = '',
+  disabled = false,
+  rules = '',
+} = defineProps<{
   label: string
   name: string
   type?: string
@@ -10,16 +19,7 @@ interface Props {
   hint?: string
   disabled?: boolean
   rules?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  type: 'text',
-  placeholder: '',
-  description: '',
-  hint: '',
-  disabled: false,
-  rules: '',
-})
+}>()
 
 const modelValue = defineModel<string>()
 </script>
@@ -37,6 +37,7 @@ const modelValue = defineModel<string>()
 
     <Field :name="name" :rules="rules" v-slot="{ field, errorMessage }">
       <input
+        v-if="type !== 'textarea'"
         v-model="modelValue"
         v-bind="field"
         :type="type"
@@ -44,6 +45,18 @@ const modelValue = defineModel<string>()
         :disabled="disabled"
         :class="[
           'w-full px-3 py-2 bg-gray-800 border rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed',
+          errorMessage ? 'border-red-500' : 'border-gray-600',
+        ]"
+      />
+      <textarea
+        v-else
+        v-model="modelValue"
+        v-bind="field"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :rows="4"
+        :class="[
+          'w-full px-3 py-2 bg-gray-800 border rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed resize-none',
           errorMessage ? 'border-red-500' : 'border-gray-600',
         ]"
       />
