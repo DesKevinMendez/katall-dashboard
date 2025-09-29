@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import BaseTable from '@/template/BaseTable.vue'
 import BaseBadge from '@/template/BaseBadge.vue'
+import TransactionDetailsModal from './TransactionDetailsModal.vue'
 import { IconEye } from '@tabler/icons-vue'
 
 interface Transaction extends Record<string, unknown> {
@@ -184,6 +185,10 @@ const originalTransactions: Transaction[] = [
 const transactions = ref<Transaction[]>([...originalTransactions])
 const router = useRouter()
 
+// Modal state
+const isModalOpen = ref(false)
+const selectedTransaction = ref<Transaction | null>(null)
+
 // Pagination state
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
@@ -209,10 +214,16 @@ function handleAction(action: string, row: Record<string, unknown>) {
   const transaction = row as unknown as Transaction
 
   if (action === 'view') {
-    console.log('Viewing transaction details:', transaction)
+    selectedTransaction.value = transaction
+    isModalOpen.value = true
   }
 
   console.log(`Action: ${action}`, transaction)
+}
+
+function handleCloseModal() {
+  isModalOpen.value = false
+  selectedTransaction.value = null
 }
 
 function getStatusVariant(status: string): 'verified' | 'pending' | 'rejected' | 'default' {
@@ -284,4 +295,11 @@ function handleItemsPerPageChange(newItemsPerPage: number) {
       </div>
     </template>
   </BaseTable>
+
+  <!-- Transaction Details Modal -->
+  <TransactionDetailsModal
+    :is-open="isModalOpen"
+    :transaction="selectedTransaction"
+    @close="handleCloseModal"
+  />
 </template>
