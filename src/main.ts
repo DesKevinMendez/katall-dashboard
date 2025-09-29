@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import '@/assets/css/tailwind.css'
+import '@/plugins/vee-validate'
 
 import App from './App.vue'
 import router from './router'

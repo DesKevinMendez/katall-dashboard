@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { Field } from 'vee-validate'
+
 interface Props {
   label: string
+  name: string
   type?: string
   placeholder?: string
   description?: string
   hint?: string
   disabled?: boolean
+  rules?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -14,6 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
   description: '',
   hint: '',
   disabled: false,
+  rules: '',
 })
 
 const modelValue = defineModel<string>()
@@ -29,16 +34,26 @@ const modelValue = defineModel<string>()
         {{ hint }}
       </span>
     </div>
-    <input
-      v-model="modelValue"
-      :type="type"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-    />
-    <p v-if="description" class="text-xs text-gray-400">
-      {{ description }}
-    </p>
+
+    <Field :name="name" :rules="rules" v-slot="{ field, errorMessage }">
+      <input
+        v-model="modelValue"
+        v-bind="field"
+        :type="type"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :class="[
+          'w-full px-3 py-2 bg-gray-800 border rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed',
+          errorMessage ? 'border-red-500' : 'border-gray-600',
+        ]"
+      />
+      <p v-if="errorMessage" class="text-xs text-red-400">
+        {{ errorMessage }}
+      </p>
+      <p v-else-if="description" class="text-xs text-gray-400">
+        {{ description }}
+      </p>
+    </Field>
   </div>
 </template>
 
