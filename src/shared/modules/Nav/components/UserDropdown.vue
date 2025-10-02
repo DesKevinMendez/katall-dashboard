@@ -79,12 +79,12 @@ defineProps<Props>()
 
 const userDropdownItems: UserDropdownItem[] = [
   {
-    to: '/profile',
+    to: '/startup/profile',
     label: 'Profile',
     icon: IconUser,
   },
   {
-    to: '/settings',
+    to: '/startup/settings',
     label: 'Settings',
     icon: IconSettings,
   },

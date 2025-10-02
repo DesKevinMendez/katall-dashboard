@@ -48,7 +48,9 @@ import BaseCard from '@/template/BaseCard.vue'
     </div>
 
     <div class="mt-6 text-right">
-      <router-link to="/transactions" class="text-blue-500 hover:text-blue-400 text-sm font-medium"
+      <router-link
+        to="/startup/transactions"
+        class="text-blue-500 hover:text-blue-400 text-sm font-medium"
         >View all</router-link
       >
     </div>

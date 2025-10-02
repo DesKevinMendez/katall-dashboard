@@ -21,11 +21,11 @@ const router = useRouter()
 function handleViewProfile(investorName: string) {
   // Convert investor name to URL-friendly format
   const investorId = investorName.toLowerCase().replace(/\s+/g, '-')
-  router.push(`/investors/${investorId}`)
+  router.push(`/startup/investors/${investorId}`)
 }
 
 function handleViewAll() {
-  router.push('/investors')
+  router.push('/startup/investors')
 }
 </script>
 

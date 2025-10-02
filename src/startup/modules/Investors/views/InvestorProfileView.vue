@@ -28,7 +28,7 @@ const investor = {
 }
 
 function goBackToInvestors() {
-  router.push('/investors')
+  router.push('/startup/investors')
 }
 </script>
 

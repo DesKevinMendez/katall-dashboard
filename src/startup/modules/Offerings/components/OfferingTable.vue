@@ -261,7 +261,7 @@ function handleAction(action: string, row: Record<string, unknown>) {
   if (action === 'view') {
     // Use the offering name as ID for navigation (you can change this to use a different field)
     const offeringId = offering.name.toLowerCase().replace(/\s+/g, '-')
-    router.push(`/offerings/${offeringId}`)
+    router.push(`/startup/offerings/${offeringId}`)
   }
 
   console.log(`Action: ${action}`, offering)

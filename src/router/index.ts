@@ -1,4 +1,5 @@
 import MainLayout from '@/layouts/MainLayout.vue'
+import GuessLayout from '@/layouts/GuessLayout.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -6,10 +7,16 @@ const router = createRouter({
   routes: [
     {
       path: '/login',
-      component: () => import('@/shared/modules/Auth/views/LoginView.vue'),
+      component: GuessLayout,
+      children: [
+        {
+          path: '',
+          component: () => import('@/shared/modules/Auth/views/LoginView.vue'),
+        },
+      ],
     },
     {
-      path: '/',
+      path: '/startup',
       component: MainLayout,
       children: [
         {

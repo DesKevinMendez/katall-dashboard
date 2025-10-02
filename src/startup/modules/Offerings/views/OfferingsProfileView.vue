@@ -21,7 +21,7 @@ const tabs = [
 ]
 
 function goBackToOfferings() {
-  router.push('/offerings')
+  router.push('/startup/offerings')
 }
 
 // Mock data for the offering

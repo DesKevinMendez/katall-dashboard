@@ -177,7 +177,7 @@ function handleAction(action: string, row: Record<string, unknown>) {
   if (action === 'view') {
     // Use the investor name as ID for navigation (you can change this to use a different field)
     const investorId = investor.fullName.toLowerCase().replace(/\s+/g, '-')
-    router.push(`/investors/${investorId}`)
+    router.push(`/startup/investors/${investorId}`)
   }
 
   console.log(`Action: ${action}`, investor)

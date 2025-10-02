@@ -16,7 +16,7 @@
           <div class="hidden md:flex items-center space-x-1">
             <!-- Dashboard -->
             <router-link
-              to="/"
+              to="/startup"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
               exact-active-class="bg-gray-800 text-white"
             >
@@ -26,7 +26,7 @@
 
             <!-- Offerings -->
             <router-link
-              to="/offerings"
+              to="/startup/offerings"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
               exact-active-class="bg-gray-800 text-white"
             >
@@ -36,7 +36,7 @@
 
             <!-- Investors -->
             <router-link
-              to="/investors"
+              to="/startup/investors"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
               exact-active-class="bg-gray-800 text-white"
             >
@@ -46,7 +46,7 @@
 
             <!-- Transactions -->
             <router-link
-              to="/transactions"
+              to="/startup/transactions"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
               exact-active-class="bg-gray-800 text-white"
             >
@@ -56,7 +56,7 @@
 
             <!-- Documents -->
             <router-link
-              to="/documents"
+              to="/startup/documents"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
               exact-active-class="bg-gray-800 text-white"
             >
@@ -97,7 +97,7 @@
       <div v-if="isMobileMenuOpen" class="md:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800 rounded-lg mt-2">
           <router-link
-            to="/"
+            to="/startup"
             class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
             exact-active-class="text-white bg-gray-700"
           >
@@ -105,7 +105,7 @@
             <span>Dashboard</span>
           </router-link>
           <router-link
-            to="/offerings"
+            to="/startup/offerings"
             class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
             exact-active-class="text-white bg-gray-700"
           >
@@ -113,7 +113,7 @@
             <span>Offerings</span>
           </router-link>
           <router-link
-            to="/investors"
+            to="/startup/investors"
             class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
             exact-active-class="text-white bg-gray-700"
           >
@@ -121,7 +121,7 @@
             <span>Investors</span>
           </router-link>
           <router-link
-            to="/transactions"
+            to="/startup/transactions"
             class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
             exact-active-class="text-white bg-gray-700"
           >
@@ -129,7 +129,7 @@
             <span>Transactions</span>
           </router-link>
           <router-link
-            to="/documents"
+            to="/startup/documents"
             class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
             exact-active-class="text-white bg-gray-700"
           >
@@ -163,12 +163,12 @@ const isMobileMenuOpen = ref(false)
 
 const moreDropdownItems: DropdownItem[] = [
   {
-    to: '/analytics',
+    to: '/startup/analytics',
     label: 'Analytics',
     icon: IconChartLine,
   },
   {
-    to: '/settings',
+    to: '/startup/settings',
     label: 'Settings',
     icon: IconSettings,
   },

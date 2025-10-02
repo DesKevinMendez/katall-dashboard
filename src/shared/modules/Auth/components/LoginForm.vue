@@ -28,7 +28,7 @@ async function handleLogin() {
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     // Redirect to dashboard after successful login
-    router.push('/')
+    router.push('/startup')
   } catch (error) {
     console.error('Login failed:', error)
   } finally {
