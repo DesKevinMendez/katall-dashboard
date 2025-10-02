@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import BaseTable from '@/template/BaseTable.vue'
 import BaseBadge from '@/template/BaseBadge.vue'
-import TransactionDetailsModal from './TransactionDetailsModal.vue'
+import BaseTable from '@/template/BaseTable.vue'
 import { IconEye } from '@tabler/icons-vue'
+import { computed, ref } from 'vue'
+import TransactionDetailsModal from './TransactionDetailsModal.vue'
 
 interface Transaction extends Record<string, unknown> {
   type: string
@@ -183,7 +182,6 @@ const originalTransactions: Transaction[] = [
 ]
 
 const transactions = ref<Transaction[]>([...originalTransactions])
-const router = useRouter()
 
 // Modal state
 const isModalOpen = ref(false)
@@ -283,7 +281,7 @@ function handleItemsPerPageChange(newItemsPerPage: number) {
       </div>
     </template>
 
-    <template #actions="{ row }">
+    <template #cell-actions="{ row }">
       <div class="flex items-center gap-2">
         <button
           @click="handleAction('view', row)"
