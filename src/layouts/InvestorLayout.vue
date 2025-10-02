@@ -5,7 +5,7 @@ import Footer from '@/shared/modules/Nav/components/Footer.vue'
 
 <template>
   <div class="min-h-screen bg-gray-900 flex flex-col">
-    <NavBar dashboard="startup" />
+    <NavBar dashboard="investor" />
     <main class="container mx-auto px-4 py-6 flex-1">
       <router-view />
     </main>

@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   IconChartBar,
   IconHome,
@@ -86,6 +86,9 @@ import {
   IconMenu2,
   IconChartLine,
   IconSettings,
+  IconTrendingUp,
+  IconWallet,
+  IconUsersGroup,
 } from '@tabler/icons-vue'
 import BaseDropdown, { type DropdownItem } from '@/template/BaseDropdown.vue'
 import UserDropdown from '@/shared/modules/Nav/components/UserDropdown.vue'
@@ -96,9 +99,15 @@ interface NavigationItem {
   icon: typeof IconHome
 }
 
+interface Props {
+  dashboard: 'startup' | 'investor'
+}
+
+const props = defineProps<Props>()
+
 const isMobileMenuOpen = ref(false)
 
-const navigationItems: NavigationItem[] = [
+const startupNavigationItems: NavigationItem[] = [
   {
     label: 'Dashboard',
     to: 'startup',
@@ -126,7 +135,35 @@ const navigationItems: NavigationItem[] = [
   },
 ]
 
-const moreDropdownItems: DropdownItem[] = [
+const investorNavigationItems: NavigationItem[] = [
+  {
+    label: 'Dashboard',
+    to: 'investor',
+    icon: IconHome,
+  },
+  {
+    label: 'Trade',
+    to: 'investor/trade',
+    icon: IconTrendingUp,
+  },
+  {
+    label: 'Portfolio',
+    to: 'investor/portfolio',
+    icon: IconWallet,
+  },
+  {
+    label: 'Transactions',
+    to: 'investor/transactions',
+    icon: IconReceipt,
+  },
+  {
+    label: 'Community',
+    to: 'investor/community',
+    icon: IconUsersGroup,
+  },
+]
+
+const startupMoreDropdownItems: DropdownItem[] = [
   {
     to: '/startup/analytics',
     label: 'Analytics',
@@ -138,6 +175,27 @@ const moreDropdownItems: DropdownItem[] = [
     icon: IconSettings,
   },
 ]
+
+const investorMoreDropdownItems: DropdownItem[] = [
+  {
+    to: '/investor/documents',
+    label: 'Documents',
+    icon: IconFileText,
+  },
+  {
+    to: '/investor/settings',
+    label: 'Settings',
+    icon: IconSettings,
+  },
+]
+
+const navigationItems = computed(() => {
+  return props.dashboard === 'investor' ? investorNavigationItems : startupNavigationItems
+})
+
+const moreDropdownItems = computed(() => {
+  return props.dashboard === 'investor' ? investorMoreDropdownItems : startupMoreDropdownItems
+})
 
 function toggleMobileMenu() {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
