@@ -2,6 +2,7 @@
 import BaseBadge from '@/template/BaseBadge.vue'
 import BaseTable from '@/template/BaseTable.vue'
 import BaseIconButton from '@/template/BaseIconButton.vue'
+import SidebarModal from '@/template/SidebarModal.vue'
 import { IconArrowsUpDown, IconShoppingCart, IconCash } from '@tabler/icons-vue'
 import { computed, ref } from 'vue'
 
@@ -102,6 +103,11 @@ const originalOrders: TradeOrder[] = [
 
 const orders = ref<TradeOrder[]>([...originalOrders])
 
+// Modal state
+const isModalOpen = ref(false)
+const selectedOrder = ref<TradeOrder | null>(null)
+const tokenAmount = ref(1)
+
 // Pagination state
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
@@ -125,6 +131,8 @@ const pagination = computed(() => ({
 
 function handleAction(action: string, row: Record<string, unknown>) {
   const order = row as unknown as TradeOrder
+  selectedOrder.value = order
+  isModalOpen.value = true
   console.log(`Action: ${action}`, order)
 }
 
@@ -212,7 +220,7 @@ function formatCurrency(amount: number): string {
     </template>
     <template #actions="{ row }">
       <BaseIconButton
-        variant="default"
+        variant="primary"
         size="sm"
         @click="handleAction((row as TradeOrder).action.toLowerCase(), row)"
       >
@@ -224,4 +232,184 @@ function formatCurrency(amount: number): string {
       </BaseIconButton>
     </template>
   </BaseTable>
+
+  <!-- Sidebar Modal -->
+  <SidebarModal
+    v-model:is-open="isModalOpen"
+    :title="
+      selectedOrder
+        ? `${selectedOrder.action} Tokens to ${selectedOrder.advertiser.name}`
+        : 'Trade Details'
+    "
+  >
+    <div v-if="selectedOrder" class="space-y-6">
+      <!-- Advertiser Instructions -->
+      <div>
+        <h3 class="text-sm font-medium text-gray-300 mb-2">Advertiser Instructions</h3>
+        <div class="bg-white rounded-lg p-4 border border-gray-200">
+          <p class="text-gray-700 text-sm">
+            I will send payment immediately after receiving tokens. Please ensure your payment
+            details are correct.
+          </p>
+        </div>
+      </div>
+
+      <!-- Transaction Details -->
+      <div>
+        <h3 class="text-sm font-medium text-gray-300 mb-3">Transaction Details</h3>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <span class="text-gray-300">Payment Time Limit:</span>
+            </div>
+            <span class="text-white font-medium">15 minutes</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <span class="text-gray-300">Average Pay Time:</span>
+            </div>
+            <span class="text-white font-medium">8 minutes</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                ></path>
+              </svg>
+              <span class="text-gray-300">Total Availability:</span>
+            </div>
+            <span class="text-white font-medium">{{ selectedOrder.availableAmount }} tokens</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                ></path>
+              </svg>
+              <span class="text-gray-300">Price per Token:</span>
+            </div>
+            <span class="text-white font-medium">{{ formatCurrency(selectedOrder.price) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amount Input -->
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-2">
+          Amount of Tokens to {{ selectedOrder.action }}
+        </label>
+        <input
+          type="number"
+          v-model="tokenAmount"
+          min="1"
+          :max="selectedOrder.availableAmount"
+          class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <div class="mt-2">
+          <span class="text-gray-300">You will receive: </span>
+          <span class="text-green-500 font-medium">{{
+            formatCurrency(tokenAmount * selectedOrder.price)
+          }}</span>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-2">
+          Select Your Payment Method
+        </label>
+        <select
+          class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option v-for="method in selectedOrder.paymentMethods" :key="method" :value="method">
+            {{ method }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Warning Box -->
+      <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-4">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-yellow-800">
+              Make sure to verify all details before confirming. Once confirmed, you'll be committed
+              to this transaction.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-3">
+        <BaseIconButton
+          variant="primary"
+          size="lg"
+          class="w-full"
+          @click="handleAction(selectedOrder.action.toLowerCase(), selectedOrder)"
+        >
+          <template #icon>
+            <IconShoppingCart v-if="selectedOrder.action === 'Buy'" class="w-5 h-5" />
+            <IconCash v-else class="w-5 h-5" />
+          </template>
+          Confirm {{ selectedOrder.action }}
+        </BaseIconButton>
+        <BaseIconButton variant="default" size="lg" class="w-full" @click="isModalOpen = false">
+          Cancel
+        </BaseIconButton>
+      </div>
+    </div>
+  </SidebarModal>
 </template>
