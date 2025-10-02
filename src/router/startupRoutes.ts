@@ -1,0 +1,44 @@
+import type { RouteRecordRaw } from 'vue-router';
+
+export const startupRoutes: RouteRecordRaw[] = [
+  {
+    path: '',
+    component: () => import('@/startup/modules/Home/views/HomeView.vue'),
+  },
+  {
+    path: 'offerings',
+    component: () => import('@/startup/modules/Offerings/views/OfferingsView.vue'),
+  },
+  {
+    path: 'offerings/:id',
+    component: () => import('@/startup/modules/Offerings/views/OfferingsProfileView.vue'),
+  },
+  {
+    path: 'investors',
+    component: () => import('@/startup/modules/Investors/views/InvestorsView.vue'),
+  },
+  {
+    path: 'investors/:id',
+    component: () => import('@/startup/modules/Investors/views/InvestorProfileView.vue'),
+  },
+  {
+    path: 'transactions',
+    component: () => import('@/startup/modules/Transactions/views/TransactionsView.vue'),
+  },
+  {
+    path: 'documents',
+    component: () => import('@/startup/modules/Documents/views/DocumentsView.vue'),
+  },
+  {
+    path: 'analytics',
+    component: () => import('@/startup/modules/Analytics/views/AnalyticsView.vue'),
+  },
+  {
+    path: 'settings',
+    component: () => import('@/startup/modules/Settings/views/SettingsView.vue'),
+  },
+  {
+    path: 'profile',
+    component: () => import('@/startup/modules/Profile/views/ProfileView.vue'),
+  },
+]
