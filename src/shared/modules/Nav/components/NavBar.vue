@@ -14,54 +14,15 @@
 
           <!-- Navigation Links -->
           <div class="hidden md:flex items-center space-x-1">
-            <!-- Dashboard -->
             <router-link
-              to="/startup"
+              v-for="item in navigationItems"
+              :key="item.to"
+              :to="`/${item.to}`"
               class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
               exact-active-class="bg-gray-800 text-white"
             >
-              <IconHome class="w-5 h-5" />
-              <span>Dashboard</span>
-            </router-link>
-
-            <!-- Offerings -->
-            <router-link
-              to="/startup/offerings"
-              class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
-              exact-active-class="bg-gray-800 text-white"
-            >
-              <IconPackage class="w-5 h-5" />
-              <span>Offerings</span>
-            </router-link>
-
-            <!-- Investors -->
-            <router-link
-              to="/startup/investors"
-              class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
-              exact-active-class="bg-gray-800 text-white"
-            >
-              <IconUsers class="w-5 h-5" />
-              <span>Investors</span>
-            </router-link>
-
-            <!-- Transactions -->
-            <router-link
-              to="/startup/transactions"
-              class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
-              exact-active-class="bg-gray-800 text-white"
-            >
-              <IconReceipt class="w-5 h-5" />
-              <span>Transactions</span>
-            </router-link>
-
-            <!-- Documents -->
-            <router-link
-              to="/startup/documents"
-              class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
-              exact-active-class="bg-gray-800 text-white"
-            >
-              <IconFileText class="w-5 h-5" />
-              <span>Documents</span>
+              <component :is="item.icon" class="w-5 h-5" />
+              <span>{{ item.label }}</span>
             </router-link>
 
             <!-- More -->
@@ -97,44 +58,14 @@
       <div v-if="isMobileMenuOpen" class="md:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800 rounded-lg mt-2">
           <router-link
-            to="/startup"
+            v-for="item in navigationItems"
+            :key="item.to"
+            :to="`/${item.to}`"
             class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
             exact-active-class="text-white bg-gray-700"
           >
-            <IconHome class="w-5 h-5" />
-            <span>Dashboard</span>
-          </router-link>
-          <router-link
-            to="/startup/offerings"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-            exact-active-class="text-white bg-gray-700"
-          >
-            <IconPackage class="w-5 h-5" />
-            <span>Offerings</span>
-          </router-link>
-          <router-link
-            to="/startup/investors"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-            exact-active-class="text-white bg-gray-700"
-          >
-            <IconUsers class="w-5 h-5" />
-            <span>Investors</span>
-          </router-link>
-          <router-link
-            to="/startup/transactions"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-            exact-active-class="text-white bg-gray-700"
-          >
-            <IconReceipt class="w-5 h-5" />
-            <span>Transactions</span>
-          </router-link>
-          <router-link
-            to="/startup/documents"
-            class="flex items-center space-x-2 px-3 py-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-            exact-active-class="text-white bg-gray-700"
-          >
-            <IconFileText class="w-5 h-5" />
-            <span>Documents</span>
+            <component :is="item.icon" class="w-5 h-5" />
+            <span>{{ item.label }}</span>
           </router-link>
         </div>
       </div>
@@ -159,7 +90,41 @@ import {
 import BaseDropdown, { type DropdownItem } from '@/template/BaseDropdown.vue'
 import UserDropdown from '@/shared/modules/Nav/components/UserDropdown.vue'
 
+interface NavigationItem {
+  label: string
+  to: string
+  icon: typeof IconHome
+}
+
 const isMobileMenuOpen = ref(false)
+
+const navigationItems: NavigationItem[] = [
+  {
+    label: 'Dashboard',
+    to: 'startup',
+    icon: IconHome,
+  },
+  {
+    label: 'Offerings',
+    to: 'startup/offerings',
+    icon: IconPackage,
+  },
+  {
+    label: 'Investors',
+    to: 'startup/investors',
+    icon: IconUsers,
+  },
+  {
+    label: 'Transactions',
+    to: 'startup/transactions',
+    icon: IconReceipt,
+  },
+  {
+    label: 'Documents',
+    to: 'startup/documents',
+    icon: IconFileText,
+  },
+]
 
 const moreDropdownItems: DropdownItem[] = [
   {
