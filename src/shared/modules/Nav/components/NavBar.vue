@@ -157,7 +157,7 @@ import {
   IconSettings,
 } from '@tabler/icons-vue'
 import BaseDropdown, { type DropdownItem } from '@/template/BaseDropdown.vue'
-import UserDropdown from '@/modules/Nav/components/UserDropdown.vue'
+import UserDropdown from '@/shared/modules/Nav/components/UserDropdown.vue'
 
 const isMobileMenuOpen = ref(false)
 

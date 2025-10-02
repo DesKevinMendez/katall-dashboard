@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ViewHead from '@/template/ViewHead.vue'
-import HomeStats from '@/modules/Home/components/HomeStats.vue'
-import RecentInvestments from '@/modules/Home/components/RecentInvestments.vue'
-import FundingProgress from '@/modules/Home/components/FundingProgress.vue'
+import HomeStats from '@/startup/modules/Home/components/HomeStats.vue'
+import RecentInvestments from '@/startup/modules/Home/components/RecentInvestments.vue'
+import FundingProgress from '@/startup/modules/Home/components/FundingProgress.vue'
 </script>
 <template>
   <div>

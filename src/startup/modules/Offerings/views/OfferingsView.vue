@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseButton from '@/template/BaseButton.vue'
-import OfferingsTable from '@/modules/Offerings/components/OfferingTable.vue'
+import OfferingsTable from '@/startup/modules/Offerings/components/OfferingTable.vue'
 import ViewHead from '@/template/ViewHead.vue'
 import { IconPlus } from '@tabler/icons-vue'
 </script>

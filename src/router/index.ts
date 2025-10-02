@@ -10,43 +10,43 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: () => import('@/modules/Home/views/HomeView.vue'),
+          component: () => import('@/startup/modules/Home/views/HomeView.vue'),
         },
         {
           path: 'offerings',
-          component: () => import('@/modules/Offerings/views/OfferingsView.vue'),
+          component: () => import('@/startup/modules/Offerings/views/OfferingsView.vue'),
         },
         {
           path: 'offerings/:id',
-          component: () => import('@/modules/Offerings/views/OfferingsProfileView.vue'),
+          component: () => import('@/startup/modules/Offerings/views/OfferingsProfileView.vue'),
         },
         {
           path: 'investors',
-          component: () => import('@/modules/Investors/views/InvestorsView.vue'),
+          component: () => import('@/startup/modules/Investors/views/InvestorsView.vue'),
         },
         {
           path: 'investors/:id',
-          component: () => import('@/modules/Investors/views/InvestorProfileView.vue'),
+          component: () => import('@/startup/modules/Investors/views/InvestorProfileView.vue'),
         },
         {
           path: 'transactions',
-          component: () => import('@/modules/Transactions/views/TransactionsView.vue'),
+          component: () => import('@/startup/modules/Transactions/views/TransactionsView.vue'),
         },
         {
           path: 'documents',
-          component: () => import('@/modules/Documents/views/DocumentsView.vue'),
+          component: () => import('@/startup/modules/Documents/views/DocumentsView.vue'),
         },
         {
           path: 'analytics',
-          component: () => import('@/modules/Analytics/views/AnalyticsView.vue'),
+          component: () => import('@/startup/modules/Analytics/views/AnalyticsView.vue'),
         },
         {
           path: 'settings',
-          component: () => import('@/modules/Settings/views/SettingsView.vue'),
+          component: () => import('@/startup/modules/Settings/views/SettingsView.vue'),
         },
         {
           path: 'profile',
-          component: () => import('@/modules/Profile/views/ProfileView.vue'),
+          component: () => import('@/startup/modules/Profile/views/ProfileView.vue'),
         },
       ],
     },
