@@ -5,6 +5,10 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/login',
+      component: () => import('@/shared/modules/Auth/views/LoginView.vue'),
+    },
+    {
       path: '/',
       component: MainLayout,
       children: [
